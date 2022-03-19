@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+<head>
+    <title>Google SignIn</title>
+    <style>
+        .container {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: calc(100vh - 30px);
+        }
+        .status {
+          font-size: 25px;
+          font-family: sans-serif;
+          text-align: center;
+          color: #666;
+        }
+    </style>
+    <script type="text/javascript" >
+      if (window.opener) {
+        window.opener.postMessage({success: true});
+        window.close();
+      }
+    </script>
+</head>
+<body>
+<div class="container">
+    <div class="status"><%= status %></div>
+</div>
+</body>
+</html> 

@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+<head>
+    <title>Google SignIn</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        body { padding-top:70px; }
+    </style>
+    <script type="text/javascript" >
+
+      let windowObjectReference = null;
+      let previousUrl = null;
+      
+      function showGooglePopup(event) {
+        event.preventDefault();
+        window.removeEventListener('message', receiveMessage);
+        if (windowObjectReference === null || windowObjectReference.closed) {
+          const width = 360;
+          const height = 400;
+          const x = window.top.outerWidth / 2 + window.top.screenX - ( width / 2);
+          const googleURL = "/auth/google";
+          windowObjectReference = window.open(
+            googleURL,
+            "_blank",
+            `toolbar=no, menubar=no, width=${width}, height=${height}, top=${160}, left=${x}`
+          );
+          windowObjectReference.focus();
+        }
+        window.addEventListener('message', event => receiveMessage(event), false);
+      }
+
+      const receiveMessage = event => {
+        const { data } = event;
+        if (data.success) {
+          window.location.replace("/");
+        }
+      };
+    </script>
+</head>
+<body>
+<div class="container">
+    <div class="jumbotron text-center text-primary">
+        <h1><span class="fa fa-lock"></span> Social Authentication</h1>
+        <p>Login or Register with:</p>
+        <a href="/auth/google" onclick="showGooglePopup(event)" class="btn btn-danger"><span class="fa fa-google"></span> SignIn with Google</a>
+    </div>
+</div>
+</body>
+</html> 
