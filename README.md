@@ -3,6 +3,7 @@
 This example shows a Google Login from a separate login route outside of react.
 Once login has completed succesfully it closes google auth popup and routes user into react app.
 This adds a secure react app with google authentication using session cookies.
+https://google-ouath-example.herokuapp.com/
 
 ## Available Scripts
 
