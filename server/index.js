@@ -24,7 +24,11 @@ const indexPath = `${rootBuildPath}/index.html`;
 app.use(express.static(rootBuildPath, { index: false }));
 
 app.use(morgan("dev"));
-app.use(cors());
+app.use(
+  cors({
+    origin: process.env.SERVER_URL,
+  })
+);
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
