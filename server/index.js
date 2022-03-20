@@ -13,7 +13,6 @@ const routes = require("./routes");
 const { isAuthenticated } = require("./middleware/auth");
 
 const PORT = process.env.PORT || "8081";
-const env = process.env.NODE_ENV || "development";
 const app = express();
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "../views"));
@@ -31,12 +30,14 @@ app.use(
 );
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.set("trust proxy", 1);
 
 app.use(
   cookieSession({
     name: "googleSession",
     maxAge: 1 * 60 * 60 * 1000,
     sameSite: "strict",
+    secure: process.env.HTTPS_SECURE === "prod" ? true : false,
     keys: [process.env.COOKIE_KEY],
   })
 );
