@@ -37,7 +37,7 @@ app.use(
     name: "googleSession",
     maxAge: 1 * 60 * 60 * 1000,
     sameSite: "strict",
-    secure: env === "production" ? true : false,
+    secure: process.env.HTTPS_SECURE === "prod" ? true : false,
     keys: [process.env.COOKIE_KEY],
   })
 );
