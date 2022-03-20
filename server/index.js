@@ -35,7 +35,9 @@ app.use(bodyParser.json());
 app.use(
   cookieSession({
     name: "googleSession",
-    maxAge: 24 * 60 * 60 * 1000,
+    maxAge: 1 * 60 * 60 * 1000,
+    sameSite: "strict",
+    secure: env === "production" ? true : false,
     keys: [process.env.COOKIE_KEY],
   })
 );
